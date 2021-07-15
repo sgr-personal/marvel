@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69">
+  <g id="not_cancellable" data-name="not cancellable" transform="translate(-3.018 -3.205)">
+    <rect id="Rectangle_1370" data-name="Rectangle 1370" width="69" height="69" rx="6" transform="translate(3.018 3.205)" fill="#d5edff"/>
+    <g id="Group_6277" data-name="Group 6277" transform="translate(22.411 22.794)">
+      <path id="Path_6387" data-name="Path 6387" d="M-615.906,5522.46V5537.3a3.879,3.879,0,0,0,3.8,3.22h11.714" transform="translate(617.544 -5510.362)" fill="none" stroke="#535353" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity="0.31"/>
+      <path id="Union_10" data-name="Union 10" d="M28.387,7.2v0ZM.782,7.044A.784.784,0,0,1,0,6.26V2.349A2.347,2.347,0,0,1,2.347,0H27.389a2.35,2.35,0,0,1,2.35,2.349V6.26a.786.786,0,0,1-.784.784Z" transform="translate(0)" fill="rgba(0,0,0,0)" stroke="#535353" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity="0.31"/>
+      <path id="Path_6389" data-name="Path 6389" d="M-604.02,5522.46h6.127" transform="translate(616.168 -5511.144)" fill="none" stroke="#535353" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity="0.31"/>
+      <path id="Path_6394" data-name="Path 6394" d="M-590.306,5536.451l8.625,8.625" transform="translate(611.195 -5513.404)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="3"/>
+      <path id="Path_6395" data-name="Path 6395" d="M-581.682,5536.451l-8.625,8.625" transform="translate(611.195 -5513.404)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>
