@@ -43,7 +43,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                {{__('msg.recharge_your_wallet')}}
+                {{__('msg.what_are_you_looking_for')}}
                 <div class=" mb-0 mr-4 row">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

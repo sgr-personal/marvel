@@ -589,7 +589,7 @@ class HomeController extends Controller{
         $total = 0;
         foreach ($product_ary AS $val) {
             $prodVariant = DB::table('product_variant')
-                ->select('product_variant.id', 'product_variant.product_id', 'product_variant.type', 'product_variant.measurement', 'product_variant.price', 'product_variant.price', 'products.name as product_name', 'products.description')
+                ->select('product_variant.id', 'product_variant.product_id', 'product_variant.type', 'product_variant.measurement', 'product_variant.price', 'product_variant.price', 'products.name as product_name', 'products.description','products.image')
                 ->leftJoin('products', 'products.id', '=', 'product_variant.product_id')
                 ->where('product_variant.id', '=', $val)
                 ->first();

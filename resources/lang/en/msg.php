@@ -492,4 +492,6 @@ return [
 
     'download_pdf' => 'Download PDF',
 
+    'what_are_you_looking_for' => 'What are you looking for',
+
 ];
