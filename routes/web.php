@@ -189,6 +189,11 @@ Route::post('pgRedirect', 'CartController@pgRedirect')->name('pgRedirect');
 Route::post('paytm/success', 'CartController@pgResponse')->name('success');
 /** PayTm Payment Gateway End */
 
+/** iPay Payment Gateway */
+Route::get('ipayTxn', 'CartController@ipayTxn')->name('ipayTxn');
+Route::match(['get','post'],'ipay/success', 'CartController@ipayResponse')->name('success');
+/** iPay Payment Gateway End */
+
 //Auth::routes();
 
 Route::get('google/redirect', 'SocialController@redirect');

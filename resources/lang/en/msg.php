@@ -364,7 +364,7 @@ return [
 
     'please_enter_valid_otp' => 'Please Enter Valid 6 Digit OTP',
 
-    'reset_password'=> 'Reset Password',
+    'reset_password' => 'Reset Password',
 
     'mobile_number' => 'Mobile Number',
 
@@ -491,5 +491,9 @@ return [
     'calculate_total' => 'Calculate Total',
 
     'download_pdf' => 'Download PDF',
+
+    'ipay' => 'iPay',
+
+    'order_now' => 'Order Now'
 
 ];
