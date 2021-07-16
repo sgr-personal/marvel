@@ -29,7 +29,7 @@ class CheckoutController extends CartController{
                     $data['title'] = __('msg.checkout');
 
                     $this->html('checkout_summary', $data);
-                    
+
                 }
 
             }else{
@@ -39,11 +39,11 @@ class CheckoutController extends CartController{
             }
 
         }
-        
+
     }
 
     public function init_checkout(){
-        
+
         if(!isLoggedIn()){
 
             return redirect()->route('login');
@@ -132,7 +132,7 @@ class CheckoutController extends CartController{
     public function address(Request $request){
 
         $data = $this->init_checkout();
-        
+
         $address = $this->post('addresses', ['data' => ['get_addresses' => 1, 'user_id' => session()->get('user')['user_id']]]);
 
         $data['address'] = [];
@@ -140,7 +140,7 @@ class CheckoutController extends CartController{
         if(!($address['error'] ?? false) && count($address)){
 
             $data['address'] = $address;
-        
+
         }
 
         $addressExist = false;
@@ -175,7 +175,7 @@ class CheckoutController extends CartController{
             $data['title'] = __('msg.checkout');
 
             $this->html('checkout_address', $data);
-            
+
         }else{
 
             return redirect()->route('shop')->with('err',  msg('no_product_checkount'));
@@ -211,7 +211,7 @@ class CheckoutController extends CartController{
                     $data['user'] = $user;
                     $data['title'] = __('msg.checkout');
                     $this->html('checkout_payment', $data);
-                    
+
                 }
 
             }else{
@@ -323,7 +323,7 @@ class CheckoutController extends CartController{
                     break;
 
                 case 'razorpay':
-                    
+
                     $request->session()->put('tmp_razorpay', $data);
 
                     $return = redirect()->route('checkout-razorpay-init');
@@ -343,7 +343,7 @@ class CheckoutController extends CartController{
                     $request->session()->put('tmp_payu', $data);
 
                     $return = redirect()->route('checkout-payu-init-bolt');
-    
+
                     break;
 
                 case 'paypal':
@@ -351,7 +351,7 @@ class CheckoutController extends CartController{
                     $request->session()->put('tmp_paypal', $data);
 
                     $return = redirect()->route('checkout-paypal-init');
-    
+
                     break;
 
                 case 'stripe':
@@ -385,20 +385,28 @@ class CheckoutController extends CartController{
                     $return = redirect()->route('payment-paystack-start');
 
                     break;
-                
+
                 case 'paytm':
 
                     $request->session()->put('tmp_paytm', $data);
-    
+
                     $return = redirect()->route('txnTest');
-    
+
+                    break;
+
+                case 'ipay':
+
+                    $request->session()->put('ipay', $data);
+
+                    $return = redirect()->route('ipayTxn');
+
                     break;
 
 
                 default:
 
                     $return = redirect()->route('checkout-payment')->with('err',  msg('select_payment_method'));
-   
+
             }
 
         }
