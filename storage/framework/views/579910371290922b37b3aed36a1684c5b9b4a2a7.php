@@ -9,11 +9,10 @@
                             <p>You are 30 seconds away from earning your own money!</p>
                             
 
-                            <input type="hidden" name="query_id" id="query_id" value="1">
-                            <a href="<?php echo e(URL::to('/quotation/3')); ?>" id="export_pdf_id">Export PDF</a>
-                            
+                            <a href="<?php echo e(URL::to('/quotation/')); ?>" id="export_pdf_id" style="display: none;">Export PDF</a>
 
                             <h3 id="total_price_view"></h3>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <?php $__currentLoopData = $data['product_list']['left']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $products): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -142,33 +141,14 @@
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (response) {
-                console.log(response);
+                var id = response.id;
+                $("#export_pdf_id").show();
+                var url = $("#export_pdf_id").attr("href");
+                $("#export_pdf_id").attr("href", url+"/"+id);
                 jQuery('#query-modal').modal('hide');
                 document.getElementById("total_price_view").innerHTML = "Total ksh "+total_price;
             }
         });
-    }
-
-    function downloadPdf() {
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        var query_id = $("#query_id").val();
-        if (query_id > 0) {
-            $.ajax({
-                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url: 'quotation-pdf', // the url where we want to POST
-                data: {query_id: query_id}, // our data object
-                dataType: 'json', // what type of data do we expect back from the server
-                encode: true,
-                success: function (response) {
-                    console.log(response);
-                    return false;
-                    jQuery('#query-modal').modal('hide');
-                    document.getElementById("total_price_view").innerHTML = "Total ksh "+total_price;
-                }
-            });
-        } else {
-            alert("Something went wrong!")
-        }
     }
 </script>
 <?php /**PATH D:\wamp64\www\marvel\resources\views/themes/ekart/custom-made.blade.php ENDPATH**/ ?>

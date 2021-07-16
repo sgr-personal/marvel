@@ -574,9 +574,9 @@ class HomeController extends Controller{
         ]);
 
         if (intval($product_id) > 0)
-            return json_encode(array("status" => "true"));
+            return json_encode(array("status" => "true", 'id' => $product_id));
         else
-            return json_encode(array("status" => "false"));
+            return json_encode(array("status" => "false", 'id' => 0));
     }
 
     public function quotationPdf($id) {
