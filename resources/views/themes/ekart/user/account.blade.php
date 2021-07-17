@@ -1,12 +1,12 @@
 <section class="section-content padding-bottom mt-5">
     <!--user address-->
     <a href="#" id="scroll"><span></span></a>
-    <nav aria-label="breadcrumb"> 
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class=" item-1"></li>
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{__('msg.home')}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{__('msg.my_account')}}</li>
-        </ol>   
+        </ol>
     </nav>
     <div class="container">
         <div class="row">
@@ -26,8 +26,8 @@
                                         <div class="col form-group">
                                             <label>{{__('msg.email')}}</label>
                                             <input type="email" name="email" value="{{ $data['profile']['email'] }}" class="form-control">
-                                            
-                                        </div>                                       
+
+                                        </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col form-group">
@@ -35,17 +35,17 @@
                                             <input type="text" value="{{ $data['profile']['mobile'] }}" class="form-control" disabled="disabled">
                                         </div>
                                     </div>
-                                   
+
                                     <div class="form-group">
                                         <button type="submit" name="submit" value="submit" class="btn btn-primary btn-block mt-4">{{__('msg.update')}} </button>
-                                    </div>         
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>   
-        </div>   
+            </main>
+        </div>
     </div>
     <!--end user address-->
 </section>
