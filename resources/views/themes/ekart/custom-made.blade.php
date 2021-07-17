@@ -21,7 +21,7 @@
                                                     <option value="0" data-price="0"> None </option>
                                                     @foreach ($products->variants as $variants)
                                                         <option value="{{$variants->id."@@".$variants->price}}">
-                                                            {{$products->name." [".$variants->measurement." ".$variants->unit_name."] of ksh ".$variants->price}}
+                                                            {{$variants->name." of ksh ".$variants->price}}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -36,7 +36,7 @@
                                                 <option value="0" data-price="0"> None </option>
                                                 @foreach ($products->variants as $variants)
                                                     <option value="{{$variants->id."@@".$variants->price}}">
-                                                        {{$products->name." [".$variants->measurement." ".$variants->unit_name."] of ksh ".$variants->price}}
+                                                        {{$variants->name." of ksh ".$variants->price}}
                                                     </option>
                                                 @endforeach
                                             </select>

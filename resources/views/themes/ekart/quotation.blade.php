@@ -53,19 +53,15 @@
 
     <table style="width: 100%;">
         <tr class="heading">
-            {{--<td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;width: 10%">Item</td>--}}
+            <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;width: 30%">Category</td>
             <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;width: 30%">Name</td>
-            <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;width: 40%">Description</td>
             <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;text-align: right;width: 20%">Price</td>
         </tr>
         <tbody>
         @foreach ($products as $key => $product)
             <tr>
-                {{--<td style="padding: 5px;vertical-align: top;width: 10%">
-                    <img class="mr-3 img-fluid" src="{{ base_path().$product->image }}" alt="Product 01" style="height: 80px;width: 80px;">
-                </td>--}}
-                <td style="padding: 5px;width: 30%;">{{ $product->product_name }}</td>
-                <td style="padding: 5px;width: 40%;">{{ strip_tags($product->description) }}</td>
+                <td style="padding: 5px;width: 30%;">{{ $product->category_name }}</td>
+                <td style="padding: 5px;width: 40%;">{{ $product->product_name }}</td>
                 <td style="padding: 5px;width: 20%;text-align: right;">{{ "ksh".$product->price }}</td>
             </tr>
         @endforeach

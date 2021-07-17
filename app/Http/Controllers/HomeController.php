@@ -534,27 +534,23 @@ class HomeController extends Controller{
 
     public function customMade(){
         $result = array();
-        $products = DB::table('products')
-            ->where('status', '=', 1)
+        $categories = DB::table('custom_product_category')
             ->paginate(100);
 
         $i=1;
         $productData = array();
-        foreach ($products AS $prod) {
-            $prodVariant = DB::table('product_variant')
-                ->select('product_variant.id', 'product_variant.product_id', 'product_variant.type', 'product_variant.measurement', 'product_variant.price', 'product_variant.price', 'unit.name as unit_name')
-                ->leftJoin('unit', 'unit.id', '=', 'product_variant.measurement_unit_id')
-                ->where('product_id', '=', $prod->id)
-                ->where('serve_for', '=', 'Available')
+        foreach ($categories AS $category) {
+            $products = DB::table('custom_product')
+                ->where('category_id', '=', $category->id)
                 ->orderBy('id', 'ASC')
                 ->paginate(500);
 
             if ($i % 2 == 0) {
-                $productData['right'][$i] = $prod;
-                $productData['right'][$i]->variants = $prodVariant;
+                $productData['right'][$i] = $category;
+                $productData['right'][$i]->variants = $products;
             } else {
-                $productData['left'][$i] = $prod;
-                $productData['left'][$i]->variants = $prodVariant;
+                $productData['left'][$i] = $category;
+                $productData['left'][$i]->variants = $products;
             }
             $i++;
         }
@@ -586,17 +582,14 @@ class HomeController extends Controller{
 
         $product_ary = explode(",", $custom_product_data->product_ids);
         $productData = array();
-        $total = 0;
         foreach ($product_ary AS $val) {
-            $prodVariant = DB::table('product_variant')
-                ->select('product_variant.id', 'product_variant.product_id', 'product_variant.type', 'product_variant.measurement', 'product_variant.price', 'product_variant.price', 'products.name as product_name', 'products.description','products.image')
-                ->leftJoin('products', 'products.id', '=', 'product_variant.product_id')
-                ->where('product_variant.id', '=', $val)
+            $product = DB::table('custom_product')
+                ->select('custom_product.name AS product_name', 'custom_product.price', 'custom_product.id', 'custom_product_category.name as category_name')
+                ->leftJoin('custom_product_category','custom_product_category.id', '=', 'custom_product.category_id')
+                ->where('custom_product.id', '=', $val)
                 ->first();
-            $total = floatval($total + $prodVariant->price);
-            $productData[] = $prodVariant;
+            $productData[] = $product;
         }
-        $custom_product_data->total = $total;
         $custom_product_data->products = $productData;
 
         $filename = rand()."quotation.pdf";

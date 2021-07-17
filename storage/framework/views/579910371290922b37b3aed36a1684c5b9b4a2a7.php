@@ -7,7 +7,6 @@
                         <div class="card-body">
                             <h4 class="card-title mb-4"><?php echo e(__('msg.custom_made_computers')); ?> </h4>
                             <p>You are 30 seconds away from earning your own money!</p>
-                            
 
                             <a href="<?php echo e(URL::to('/quotation/')); ?>" id="export_pdf_id" style="display: none;">Export PDF</a>
 
@@ -22,7 +21,7 @@
                                                     <option value="0" data-price="0"> None </option>
                                                     <?php $__currentLoopData = $products->variants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $variants): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option value="<?php echo e($variants->id."@@".$variants->price); ?>">
-                                                            <?php echo e($products->name." [".$variants->measurement." ".$variants->unit_name."] of ksh ".$variants->price); ?>
+                                                            <?php echo e($variants->name." of ksh ".$variants->price); ?>
 
                                                         </option>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -38,7 +37,7 @@
                                                 <option value="0" data-price="0"> None </option>
                                                 <?php $__currentLoopData = $products->variants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $variants): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($variants->id."@@".$variants->price); ?>">
-                                                        <?php echo e($products->name." [".$variants->measurement." ".$variants->unit_name."] of ksh ".$variants->price); ?>
+                                                        <?php echo e($variants->name." of ksh ".$variants->price); ?>
 
                                                     </option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
