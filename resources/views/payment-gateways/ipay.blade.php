@@ -4,7 +4,6 @@ header("Cache-Control: no-cache");
 header("Expires: 0");
 
 $vid = "demo";
-$vid = "demo";
 
 $order = "ORDS" . rand(10000, 99999999);
 $total_price = (float)$tmp['final_total'];
@@ -15,7 +14,7 @@ $fields = array(
     "oid" => $order,
     "inv" => $order,
     "ttl" => $total_price,
-    "tel" => $loggedInUser['mobile'],
+    "tel" => $tmp['mobile'],
     "eml" => $loggedInUser['email'],
     "vid" => $vid,
     "curr" => "KES",
@@ -28,7 +27,7 @@ $generated_hash = hash_hmac('sha1', $datastring, $hashkey);
 ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head   >
     <title>Merchant Check Out Page</title>
     <meta name="GENERATOR" content="Evrsoft First Page">
 </head>
@@ -40,7 +39,7 @@ $generated_hash = hash_hmac('sha1', $datastring, $hashkey);
     <input type="hidden" name="oid" value="{{$order}}">
     <input type="hidden" name="inv" value="{{$order}}">
     <input type="hidden" name="ttl" value="{{ (float)$total_price }}">
-    <input type="hidden" name="tel" value="{{$loggedInUser['mobile']}}">
+    <input type="hidden" name="tel" value="{{$tmp['mobile']}}">
     <input type="hidden" name="eml" value="{{$loggedInUser['email']}}">
     <input type="hidden" name="vid" value="{{$vid}}">
     <input type="hidden" name="curr" value="KES">

@@ -258,7 +258,7 @@ class CheckoutController extends CartController{
 
             $data[api_param('quantity')] = $this->getQty($cart);
 
-            $data[api_param('mobile')] = $loggedInUser['mobile'];
+            $data[api_param('mobile')] = $request->mobileNo;
 
             $data[api_param('delivery-charge')] = $cart['shipping'] ?? 0;
 

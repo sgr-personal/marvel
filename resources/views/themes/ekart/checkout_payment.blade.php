@@ -257,6 +257,7 @@
                                 <button type="button" class="btn btn-danger"
                                         data-dismiss="modal">{{__('msg.cancel')}}</button>
                                 <form action="{{ route('checkout-proceed') }}" method="POST">
+                                    <input type="hidden" name="mobileNo" value="{{$data['address']->mobile}}">
                                     <input type="hidden" name="deliverDay" id="date">
                                     <input type="hidden" name="deliveryTime">
                                     <input type="hidden" name="paymentMethod">

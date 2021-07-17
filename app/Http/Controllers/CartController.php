@@ -972,6 +972,7 @@ class CartController extends Controller
 
     public function ipayTxn(Request $request)
     {
+
         $paymentMethods = Cache::get('payment_methods');
         $tmp = $request->session()->get('ipay');
         $tmp[get('api-params.status')] = get('api-params.order-status.awaiting-payment');
