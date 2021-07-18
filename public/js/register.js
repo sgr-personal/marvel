@@ -13,10 +13,10 @@ $(document).ready(function(){
                 form.find('button[type=submit]').removeAttr('disabled');
                 try{
                     var obj = JSON.parse(response);
-                    if(obj.error === true){
-                        $("#registerError").html(obj.message).show();
+                    if(obj.error == 'false'){
+                        window.location.href = "/my-account";
                     }else{
-                        window.location.href = "/my-account"
+                        $("#registerError").html(obj.message).show();
                     }
                 }catch(ev){
                     form.find('button[type=submit]').removeAttr('disabled');

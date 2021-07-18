@@ -45,7 +45,13 @@
                             <input class="form-control" name='friends_code' type="text" value='{{ $data['friends_code'] }}'>
                         </div>
                     </div>
-                    <div class="form-group"> 
+                    <div class="form-group">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="is_agent" name="is_agent">
+                            <div class="custom-control-label"> {{__('msg.is_agent')}} </div>
+                        </label>
+                    </div>
+                    <div class="form-group">
                         <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" required> <div class="custom-control-label"> {{__('msg.I am agree with')}} <a href="{{ route('page', 'tnc') }}" target="_blank">{{__('msg.terms and contitions')}}</a>  </div> </label>
                     </div>
                     <div class="form-group">

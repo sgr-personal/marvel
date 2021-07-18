@@ -443,6 +443,10 @@ class HomeController extends Controller{
                     $errors = $validator->messages()->all();
                     $response['message'] = $errors[0];
                 }else{
+                    $is_agent = 0;
+                    if (isset($request->is_agent) && trim($request->is_agent) == "on") {
+                        $is_agent = 1;
+                    }
                     $param = array();
                     $session = session()->get('registeration');
                     $mobile = substr($user->phoneNumber, strlen($session['country'] ?? $request->country));
@@ -456,12 +460,13 @@ class HomeController extends Controller{
                     $param[api_param('city-id')] = $request->city ?? '';
                     $param[api_param('area-id')] = $request->area ?? '';
                     $param[api_param('street')] = $request->address ?? '';
+                    $param[api_param('is_agent')] = $is_agent;
                     $param[api_param('latitude')] = 0;
                     $param[api_param('longitude')] = 0;
                     $param[api_param('country-code')] = $session['country'] ?? $request->country;
                     $registration = $this->post('user-registration', ['data' => $param]);
                     if($registration['error'] === false){
-                        $response['error'] = false;
+                        $response['error'] = 'false';
                         $response['message'] = $registration['message'];
                         unset($registration['friends_code']);
                         unset($registration['message']);

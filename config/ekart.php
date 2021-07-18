@@ -133,6 +133,8 @@ return [
 
         'street' => 'street',
 
+        'is_agent' => 'is_agent',
+
         'latitude' => 'latitude',
 
         'longitude' => 'longitude',

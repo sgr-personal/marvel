@@ -496,6 +496,22 @@ return [
 
     'ipay' => 'iPay',
 
-    'order_now' => 'Order Now'
+    'order_now' => 'Order Now',
+
+    'is_agent' => 'Is Agent',
+
+    'agent_commission' => 'Agent Commission',
+
+    'order_no' => 'Order No',
+
+    'order_date' => 'Order Date',
+
+    'product' => 'Product',
+
+    'total' => 'Total',
+
+    'commission_%' => 'Commission %',
+
+    'commission_amount' => 'Commission Amount',
 
 ];

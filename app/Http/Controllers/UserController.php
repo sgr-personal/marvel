@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class UserController extends Controller{
-    
+
     public function index(Request $request){
         $user = $this->post('get-user', ['data' => ['get_user_data' => 1, 'user_id' => session()->get('user')['user_id']]]);
         if(isset($user['error']) && !$user['error']){
@@ -31,7 +32,7 @@ class UserController extends Controller{
             $data['status'] = $type;
 
         }
-        
+
         $list = $this->post('order-process', ['data' => $data, 'data_param' => '']);
 
         $total = $list['total'] ?? 0;
@@ -60,26 +61,26 @@ class UserController extends Controller{
 
         }
 
-        $this->html('user.orders', ['title' => __('msg.my_orders'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);  
-        
+        $this->html('user.orders', ['title' => __('msg.my_orders'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);
+
     }
 
     public function track($orderId){
-        
+
         $data = [api_param('get-orders') => api_param('get-val'), api_param('user-id') => session()->get('user')['user_id'], 'order_id' => $orderId];
-        
+
         $list = $this->post('order-process', ['data' => $data]);
 
         if(count($list) && isset($list[0])){
 
-            $this->html('user.order-track', ['list' => $list[0]]); 
+            $this->html('user.order-track', ['list' => $list[0]]);
 
         }else{
 
             abort(404);
 
         }
-        
+
     }
 
     public function order_status_update($orderId, $orderItemId, $status){
@@ -110,7 +111,7 @@ class UserController extends Controller{
 
         \extract($data);
 
-        $this->html('user.wallet-history', ['title' => __('msg.wallet_history'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);  
+        $this->html('user.wallet-history', ['title' => __('msg.wallet_history'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);
 
     }
 
@@ -126,7 +127,7 @@ class UserController extends Controller{
 
         \extract($data);
 
-        $this->html('user.transaction-history', ['title' => __('msg.transaction_history'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);         
+        $this->html('user.transaction-history', ['title' => __('msg.transaction_history'), 'list' => $list, 'limit' => $limit, 'total' => $total, 'next' => $nextPage, 'last' => $lastPage]);
 
     }
 
@@ -230,7 +231,7 @@ class UserController extends Controller{
             $response['message'] = $errors[0];
 		}else{
             $tmp_user = session()->get('temp_user');
-            $data = ['data' => [api_param('type') => api_param('change-password'), api_param('password') => $request->password, api_param('id') => $tmp_user['id']]];                        
+            $data = ['data' => [api_param('type') => api_param('change-password'), api_param('password') => $request->password, api_param('id') => $tmp_user['id']]];
             $response = $this->post('user-registration', $data);
             if(!$response['error']){
                 session()->put('suc', 'Password Reset Successfully.');
@@ -240,13 +241,13 @@ class UserController extends Controller{
     }
 
     public function referearn(Request $request){
-        
+
         $user = $this->post('get-user', ['data' => ['get_user_data' => 1, 'user_id' => session()->get('user')['user_id']]]);
 
         if(isset($user['error']) && !$user['error']){
 
             $data['profile'] = $user;
-            
+
             $data['title'] = __('msg.refer_and_earn');
 
             $this->html('user.refer-earn', $data);
@@ -270,7 +271,7 @@ class UserController extends Controller{
     public function address(Request $request){
 
         $address = $this->post('addresses', ['data' => ['get_addresses' => 1, 'user_id' => session()->get('user')['user_id']]]);
-        
+
         if(isset($address['error']) && !$address['error']){
 
             $data['address'] = [];
@@ -291,7 +292,7 @@ class UserController extends Controller{
     public function address_add(Request $request){
 
         $params = $request->only('name', 'mobile', 'alternate_mobile', 'address', 'landmark', 'pincode', 'city', 'area', 'state', 'country', 'type', 'latitude', 'longitude', 'country_code');
-        
+
         $request->validate([
             'name' => 'required|max:255',
             'mobile' => 'required|numeric',
@@ -345,6 +346,40 @@ class UserController extends Controller{
 
         }
 
+    }
+
+    public function agent_commission(Request $request) {
+        $result = array();
+        $user_id = session()->get('user')['user_id'];
+        $orders = DB::table('order_items')
+            ->where('user_id', '=', $user_id)
+            ->paginate();
+
+        $productData = array();
+        $sr_no = 1;
+        foreach ($orders AS $order) {
+            $product = DB::table('product_variant')
+                ->select('product_variant.id AS product_variant_id', 'products.name as product_name', 'product_variant.product_id', 'products.commission')
+                ->leftJoin('products','products.id', '=', 'product_variant.product_id')
+                ->where('product_variant.id', '=', $order->product_variant_id)
+                ->where('products.name', '!=', "")
+                ->first();
+
+            if (!empty($product)) {
+                $total = $order->sub_total;
+                $commission = floatval($product->commission);
+                $commission_amt = floatval($total * $commission / 100);
+                $product->commission_amt = $commission_amt;
+                $product->order_id = $order->order_id;
+                $product->order_date = $order->date_added;
+                $product->total = $total;
+                $product->sr_no = $sr_no;
+                $productData[] = $product;
+                $sr_no++;
+            }
+        }
+
+        $this->html('user.agent-commission', ['title' => __('msg.agent_commission'), 'list' => $productData]);
     }
 
 }

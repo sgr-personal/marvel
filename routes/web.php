@@ -133,6 +133,8 @@ Route::get('/my-account', 'UserController@index')->name('my-account')->middlewar
 
 Route::post('/my-account', 'UserController@update_profile');
 
+Route::get('/agent-commission', 'UserController@agent_commission')->name('agent-commission');
+
 Route::get('/orders/{type?}', 'UserController@orders')->name('my-orders');
 
 Route::get('/orders/status/{orderId}/{orderItemId}/{status}', 'UserController@order_status_update')->name('order-item-status');

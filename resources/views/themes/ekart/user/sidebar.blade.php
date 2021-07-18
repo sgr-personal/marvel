@@ -20,6 +20,9 @@
         <a href="{{ route('transaction-history') }}" class="list-group-item"><em class="fa fa-outdent"></em><span class="side-menu">{{__('msg.transaction_history')}}</span></a>
         <a href="{{ route('refer-earn') }}" class="list-group-item"><em class="fa fa-user-plus"></em><span class="side-menu">{{__('msg.refer_and_earn')}}</span></a>
         <a href="{{ route('addresses') }}" class="list-group-item"><em class="fa fa-wrench"></em><span class="side-menu">{{__('msg.manage_addresses')}}</span></a>
+        @if(isset($data['profile']['is_agent']) && intval($data['profile']['is_agent']) == 1)
+            <a href="{{ route('agent-commission') }}" class="list-group-item"><em class="fa fa-money-check"></em><span class="side-menu">{{__('msg.agent_commission')}}</span></a>
+        @endif
         <a href="{{ route('logout') }}" class="list-group-item"><em class="fa fa-sign-out-alt"></em><span class="side-menu">{{__('msg.logout')}}</span></a>
     </div>
 </aside>
