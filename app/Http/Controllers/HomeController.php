@@ -587,14 +587,18 @@ class HomeController extends Controller{
 
         $product_ary = explode(",", $custom_product_data->product_ids);
         $productData = array();
+        $total = 0;
         foreach ($product_ary AS $val) {
             $product = DB::table('custom_product')
                 ->select('custom_product.name AS product_name', 'custom_product.price', 'custom_product.id', 'custom_product_category.name as category_name')
                 ->leftJoin('custom_product_category','custom_product_category.id', '=', 'custom_product.category_id')
                 ->where('custom_product.id', '=', $val)
                 ->first();
+
+            $total = floatval($product->price + $total);
             $productData[] = $product;
         }
+        $custom_product_data->total = $total;
         $custom_product_data->products = $productData;
 
         $filename = rand()."quotation.pdf";

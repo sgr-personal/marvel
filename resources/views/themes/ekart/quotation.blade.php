@@ -6,7 +6,7 @@
                 <table>
                     <tr>
                         <td class="title" style="padding-bottom: 20px;font-size: 45px;line-height: 45px;color: #333;">
-                            <img src="{{ base_path()."/upload/img/logo.png" }}" style="width: 100%; max-width: 300px" />
+                            <img src="{{ asset('images/marvel_logo.png') }}" style="width: 100%; max-width: 300px" />
                         </td>
                     </tr>
                 </table>
@@ -18,9 +18,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="text-align: left;padding-bottom: 40px;">
-                            TEL:  +254 786 178372 ,0726 178372<br />
-                            EMAIL: XGAMERtechnologies@gmail.com<br />
-                            VAT PIN: P051741660D
+                            Mr/Mrs/Ms/Company: {{ $person }}<br />
+                            Email: {{ $email }}<br />
+                            Phone: {{ $phone }}<br />
+                            Date: {{ $date }}
                         </td>
 
 
@@ -35,7 +36,7 @@
             </td>
         </tr>
 
-        <tr class="information">
+        {{--<tr class="information">
             <td colspan="4" style="padding: 5px;vertical-align: top;">
                 <table style="width: 100%;">
                     <tr>
@@ -48,7 +49,7 @@
                     </tr>
                 </table>
             </td>
-        </tr>
+        </tr>--}}
     </table>
 
     <table style="width: 100%;">
@@ -65,6 +66,10 @@
                 <td style="padding: 5px;width: 20%;text-align: right;">{{ "ksh".$product->price }}</td>
             </tr>
         @endforeach
+        <tr>
+           <td colspan="2" style="padding: 5px;width: 80%;text-align: right;">Total ksh:</td>
+           <td style="padding: 5px;width: 20%;text-align: right;">{{ $total }}</td>
+        </tr>
         </tbody>
     </table>
     <footer class="footer">
