@@ -574,10 +574,17 @@ class HomeController extends Controller{
             'date' => date("Y-m-d")
         ]);
 
+        $product = DB::table('custom_product')
+            ->select('custom_product.name as product_name')
+            ->whereIn('custom_product.id', explode(",", $_POST['product_ids']))
+            ->get()->toArray();
+        $productAry = array_column($product, "product_name");
+        $products = implode(" / ", $productAry);
+
         if (intval($product_id) > 0)
-            return json_encode(array("status" => "true", 'id' => $product_id));
+            return json_encode(array("status" => "true", 'id' => $product_id, 'products' => $products));
         else
-            return json_encode(array("status" => "false", 'id' => 0));
+            return json_encode(array("status" => "false", 'id' => 0, 'products' => ''));
     }
 
     public function quotationPdf($id) {
