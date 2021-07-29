@@ -74,7 +74,7 @@
             // inject a hidden input with this name, and on submit, populate it with the result of getNumber
             hiddenInput: "",
             // initial country
-            initialCountry: "",
+            initialCountry: "ke",
             // localized country names e.g. { 'de': 'Deutschland' }
             localizedCountries: null,
             // don't insert international dial codes

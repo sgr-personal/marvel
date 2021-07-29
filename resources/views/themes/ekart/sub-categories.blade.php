@@ -1,5 +1,8 @@
 <section class="footerfix section-content padding-bottom">
     <a href="#" id="scroll"><span></span></a>
+    <div class="container category_desc" style="margin-bottom: 20px;">
+        {!! $data['category']->description !!}
+    </div>
     <div class="container">
         <nav class="row row-eq-height">
             @if(isset($data['sub-categories']))
@@ -16,7 +19,7 @@
                         </div>
                     </div>
                 </a>
-            </div>               
+            </div>
             @endforeach
             @else
             <div class="row">
