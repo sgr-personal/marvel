@@ -430,10 +430,10 @@ class HomeController extends Controller{
     }
 
     public function register(Request $request){
-        $factory = (new Factory)->withServiceAccount(base_path('config/firebase.json'));
-        $auth = $factory->createAuth();
-        $user = $auth->getUser($request->auth_uid);
-        if($user->uid == $request->auth_uid){
+//        $factory = (new Factory)->withServiceAccount(base_path('config/firebase.json'));
+//        $auth = $factory->createAuth();
+//        $user = $auth->getUser($request->auth_uid);
+//        if($user->uid == $request->auth_uid){
             if($request->has('action') && $request->action == 'save'){
                 $response = array('error' => true, 'message' => 'Something Went Wrong');
                 $validator = Validator::make($request->all(), [
@@ -449,7 +449,7 @@ class HomeController extends Controller{
                     }
                     $param = array();
                     $session = session()->get('registeration');
-                    $mobile = substr($user->phoneNumber, strlen($session['country'] ?? $request->country));
+                    $mobile = $request->mobile;
                     $param[api_param('type')] = api_param('register');
                     $param[api_param('name')] = $request->display_name;
                     $param[api_param('friends-code')] = $request->friends_code ?? session()->get('friends_code', '');
@@ -463,7 +463,7 @@ class HomeController extends Controller{
                     $param[api_param('is_agent')] = $is_agent;
                     $param[api_param('latitude')] = 0;
                     $param[api_param('longitude')] = 0;
-                    $param[api_param('country-code')] = $session['country'] ?? $request->country;
+                    $param[api_param('country-code')] = $request->country;
                     $registration = $this->post('user-registration', ['data' => $param]);
                     if($registration['error'] === false){
                         $response['error'] = 'false';
@@ -477,22 +477,23 @@ class HomeController extends Controller{
                     }
                 }
                 echo json_encode($response);
-            }else{
+            }
+            else{
                 $data = array();
-                $data['email'] = $user->email;
-                $data['display_name'] = $user->displayName;
-                $data['country'] = $request->country_code;
-                $data['mobile'] = substr($request->mobile, strlen($request->country_code));
-                $data['auth_uid'] = $request->auth_uid;
-                $data['friends_code'] = $request->friends_code ?? session()->get('friends_code', '');
+//                $data['email'] = $user->email;
+//                $data['display_name'] = $user->displayName;
+                $data['country'] = "+254";
+//                $data['mobile'] = substr($request->mobile, strlen($request->country_code));
+//                $data['auth_uid'] = $request->auth_uid;
+//                $data['friends_code'] = $request->friends_code ?? session()->get('friends_code', '');
 
-                session()->put('registeration', $data);
+//                session()->put('registeration', $data);
                 $this->html('register', $data);
                 $data['title'] = __('msg.register');
             }
-        }else{
+        /*}else{
             return back()->with("err", 'Auth Token Not Matched');
-        }
+        }*/
     }
 
     public function city(Request $request){

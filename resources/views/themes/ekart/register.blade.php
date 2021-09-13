@@ -6,27 +6,27 @@
                 <form method='POST' id='registerForm'>
                     @csrf
                     <input type="hidden" name="action" value="save">
-                    <input type="hidden" name="auth_uid" value="{{ $data['auth_uid'] }}">
-                    <input type="hidden" name="mobile" value="{{ $data['mobile'] }}">
-                    <input type="hidden" name="country" value="{{ $data['country'] }}">
+{{--                    <input type="hidden" name="auth_uid" value="{{ $data['auth_uid'] }}">--}}
+{{--                    <input type="hidden" name="mobile" value="{{ $data['mobile'] }}">--}}
+                    <input type="hidden" name="country" id="country_code" value="{{ $data['country'] }}">
                     <div class="form-group">
                         <div class="alert alert-danger error-hide" id="registerError"></div>
                     </div>
                     <div class="form-row">
                         <div class="col form-group">
                             <label>{{__('msg.full_name')}}</label>
-                            <input type="text" name='display_name' class="form-control" value='{{ $data['display_name'] }}' required autofocus>
+                            <input type="text" name='display_name' class="form-control" value='' required autofocus>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>{{__('msg.email')}}</label>
-                        <input type="email" class="form-control" name='email' placeholder="" value='{{ $data['email'] }}' required>
+                        <input type="email" class="form-control" name='email' placeholder="" value='' required>
                         <small class="form-text text-muted">{{__('msg.we_will_never_share_you_email_with_anyone_else')}}.</small>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>{{__('msg.mobile')}}</label>
-                            <input type="text" class="form-control" name='mobile' placeholder="" value='{{ $data['mobile'] }}' readonly>
+                            <input type="number" pattern="/^-?\d+\.?\d*$/" class="form-control" name='mobile' placeholder="" id="addPhone" value='' required onKeyPress="if(this.value.length==10) return false;">
                         </div>
                     </div>
                     <div class="form-row">
@@ -42,7 +42,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>{{__('msg.referral_code')}}</label>
-                            <input class="form-control" name='friends_code' type="text" value='{{ $data['friends_code'] }}'>
+                            <input class="form-control" name='friends_code' type="text" value=''>
                         </div>
                     </div>
                     <div class="form-group">

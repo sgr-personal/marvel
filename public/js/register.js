@@ -1,6 +1,13 @@
 "use strict";
+var addPhone = document.querySelector("#addPhone");
+window.intlTelInput(addPhone);
+var itiAdd = window.intlTelInputGlobals.getInstance(addPhone);
 
 $(document).ready(function(){
+    addPhone.addEventListener("countrychange", function() {
+        var c = itiAdd.getSelectedCountryData();
+        $("#registerForm #country_code").val("+" + c.dialCode);
+    });
     $("#registerForm").on("submit", function(e){
         var form = $(this);
         form.find('button[type=submit]').attr('disabled', 'disabled');

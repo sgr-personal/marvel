@@ -41,7 +41,7 @@
                                     </a>
                                 </div>
                             </form>
-                            <p class="text-center mt-4">{{__('msg.don')}}'{{__('msg.t_have_account')}} <a href="#" id="btnRegister">{{__('msg.sign_up')}}</a></p>
+                            <p class="text-center mt-4">{{__('msg.don')}}'{{__('msg.t_have_account')}} <a href="{{ route('register') }}" id="btnRegister_old">{{__('msg.sign_up')}}</a></p>
                         </div>
                     </div>
                 </div>

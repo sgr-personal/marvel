@@ -35,6 +35,8 @@ Route::post('/login', 'HomeController@login');
 
 Route::post('/register', 'HomeController@register')->name('register');
 
+Route::get('/register', 'HomeController@register')->name('register');
+
 Route::get('/already-registered', 'HomeController@already_registered')->name('already-registered');
 
 Route::get('/forgot-password', 'HomeController@forgot_password')->name('forgot-password');
