@@ -3,12 +3,13 @@ header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");
 
-$vid = "demo";
+//$vid = "demo";
+$vid = "newage";
 
 $order = "ORDS" . rand(10000, 99999999);
 $total_price = (float)$tmp['final_total'];
 $callback = env('APP_URL', 'default_value') . "ipay/success";
-$environment = 0; //0 for test & 1 for live
+$environment = 1; //0 for test & 1 for live
 $fields = array(
     "live" => $environment,
     "oid" => $order,
@@ -22,7 +23,9 @@ $fields = array(
     "crl" => "2"
 );
 $datastring = $fields['live'] . $fields['oid'] . $fields['inv'] . $fields['ttl'] . $fields['tel'] . $fields['eml'] . $fields['vid'] . $fields['curr'] . $fields['cbk'] . $fields['crl'];
-$hashkey = "demoCHANGED";
+//$hashkey = "demoCHANGED";
+$hashkey = "5YVxF6xuJCE2@x3U6HuXw?7#Ve6ubh69";
+//5YVxF6xuJCE2@x3U6HuXw?7#Ve6ubh69
 $generated_hash = hash_hmac('sha1', $datastring, $hashkey);
 ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

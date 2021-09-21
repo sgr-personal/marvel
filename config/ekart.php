@@ -17,11 +17,11 @@ return [
 
     'theme' => 'ekart',
 
-    'home_url' => env("APP_URL", "http://127.0.0.1:8000/"),
+    'home_url' => env("APP_URL", "https://www.marveltechkenya.com/"),
 
-    'api_url' => env("API_URL", "http://localhost/marvel_backend/api-firebase/"),
+    'api_url' => env("API_URL", "https://www.marveltechkenya.com/admin/api-firebase/"),
 
-    'asset_url' => env("ASSET_URL1", "http://localhost/marvel_backend/dist/img/"),
+    'asset_url' => env("ASSET_URL1", "https://www.marveltechkenya.com/admin/dist/img/"),
 
     'access_key' => env("ACCESS_KEY", "accesskey"),
 
@@ -54,6 +54,8 @@ return [
         'get-social-media' => 'get-social-media.php',
 
         'get-sub-categories' => 'get-subcategories-by-category-id.php',
+
+        'get-attributes' => 'get-attributes.php',
 
         'get-cities' => 'get-cities.php',
 
