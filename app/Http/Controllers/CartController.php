@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+ini_set('memory_limit', -1);
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
